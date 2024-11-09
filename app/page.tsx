@@ -5,8 +5,9 @@
 import { FlyControls, useFBX } from "@react-three/drei";
 
 import { Canvas } from "@react-three/fiber";
+import dynamic from "next/dynamic";
 
-export default function Home() {
+const Home = () => {
   const scene = useFBX("/models/building/building.fbx");
 
   // turn all frustrum culling off
@@ -46,4 +47,8 @@ export default function Home() {
       </Canvas>
     </>
   );
-}
+};
+
+export default dynamic(() => Promise.resolve(Home), {
+  ssr: false,
+});
